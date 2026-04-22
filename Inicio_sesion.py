@@ -10,23 +10,38 @@ class Inicio_sesion:
         self.label_mensaje = ""
 
     def ejecutar_preguntas(self):
-        label_usuario = Ventana.Label(self.formulario, text="Usuario: ")
+        label_usuario = Ventana.Label(self.formulario, text="Digite el nombre:")
         label_usuario.pack()
 
-        entry_usuario = Ventana.Entry(self.formulario)
-        entry_usuario.pack()
+       
+        self.entry_usuario = Ventana.Entry(self.formulario)
+        self.entry_usuario.pack()
 
-        self.label_mensaje = Ventana.Label(self.formulario, text="mensaje")
+        self.label_mensaje = Ventana.Label(self.formulario, text="")
         self.label_mensaje.pack()
 
-        boton_inicio = Ventana.Button(
+        boton_guardar = Ventana.Button(
             self.formulario,
-            text="Iniciar sesion",
+            text="Guardar Cliente",
             command=lambda: self.iniciar_sesion()
         )
-        boton_inicio.pack()
+        boton_guardar.pack()
+
+       
+        boton_limpiar = Ventana.Button(
+            self.formulario,
+            text="Limpiar",
+            command=lambda: self.limpiar()
+        )
+        boton_limpiar.pack()
 
         return self.formulario
 
     def iniciar_sesion(self):
-        self.label_mensaje.config(text="Usuario inicio sesion....")
+        
+        usuario = self.entry_usuario.get()
+        self.label_mensaje.config(text=f"Cliente guardado: {usuario}")
+
+    def limpiar(self):
+        self.entry_usuario.delete(0, Ventana.END)
+        self.label_mensaje.config(text="")
